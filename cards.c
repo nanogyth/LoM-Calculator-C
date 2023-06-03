@@ -1,4 +1,90 @@
-#include "calc.h"
+#include "cards.h"
+
+typedef enum { CPRINT,PREHIDDEN,HIDDEN,FIRST,SECOND,THIRD,LEAVING,WORLD } CARD_F;
+
+typedef void (card_function)(CARD_F);
+
+card_function *prehidden,*hidden,*first,*second,*third,*leaving,
+no_card,tower,sacrificed_nymph,
+pixie_of_jealousy,pixie_of_laziness,pixie_of_lust,pixie_of_pride,
+pixie_of_gluttony,pixie_of_rage,pixie_of_greed,
+fallen_angel,witch_of_moon,lord_of_flies,wings_of_darkness,
+god_of_destruction,leviathan,beast_headed_god;
+
+typedef enum { NONE,YGGDRASIL,HEAVENS_SCALE,DYING_EARTH,RAGNAROK,
+	ANCIENT_MOON,MIRRORED_WORLD,BED_OF_THORN } WORLD_CARD;
+WORLD_CARD awc;
+
+void set_active_world_card(void){
+	awc=NONE;
+	third(WORLD);second(WORLD);first(WORLD);hidden(WORLD);
+}
+
+typedef enum { STICKY,UNSTICKY } STICKY_F;
+STICKY_F sticky;
+
+void init_cards(void){
+	hidden=no_card;first=no_card;second=no_card;third=no_card;
+}
+
+void sub_init_cards(void){
+	prehidden=no_card;leaving=no_card;sticky=STICKY;
+}
+
+void unsticky(void){
+	sticky=UNSTICKY;
+}
+
+#define PIXIE(pos) (pixie_of_jealousy==(pos)||pixie_of_laziness==(pos)||\
+ pixie_of_lust==(pos)||pixie_of_pride==(pos)||pixie_of_gluttony==(pos)||\
+ pixie_of_rage==(pos)||pixie_of_greed==(pos))
+
+void push_cards(void){
+if(no_card!=prehidden){
+  if(no_card==hidden){
+    hidden=prehidden;
+  }else if(no_card==first){
+    first=hidden;hidden=prehidden;
+  }else if(no_card==second){
+    second=first;first=hidden;hidden=prehidden;
+  }else if(no_card==third){
+    third=second;second=first;first=hidden;hidden=prehidden;
+  }else if(STICKY==sticky){
+    if(PIXIE(third)){
+      if(PIXIE(second)){
+        if(PIXIE(first)){
+          leaving=hidden;hidden=prehidden;
+        }else{
+          leaving=first;first=hidden;hidden=prehidden;
+        }
+      }else{
+        leaving=second;second=first;first=hidden;hidden=prehidden;
+      }
+    }else{
+      leaving=third;third=second;second=first;first=hidden;hidden=prehidden;
+    }
+  }else{
+    leaving=third;third=second;second=first;first=hidden;hidden=prehidden;
+  }
+}
+}
+
+void activate_cards(void){
+	leaving(LEAVING);
+	  third(THIRD);
+	 second(SECOND);
+	  first(FIRST);
+	 hidden(HIDDEN);
+}
+
+void print_cards(void){
+	    printf("(");
+	 hidden(CPRINT);printf(")\n ");
+	  first(CPRINT);printf("\n ");
+	 second(CPRINT);printf("\n ");
+	  third(CPRINT);printf("\n>");
+	leaving(CPRINT);printf(">\n");
+}
 
 void no_card(CARD_F card_f){
 	switch(card_f){
@@ -543,7 +629,7 @@ void metropolis(CARD_F card_f){
 	case FIRST:
 	case SECOND:
 	case THIRD:
-		if(16==equip){ /* robe */
+		if(ROBE){
 			perc150(&magic);
 		} else {
 			perc125(&magic);

@@ -1,4 +1,13 @@
-#include "calc.h"
+#include "material.h"
+
+int material;
+#define WOOD (material>11 && material<20)
+#define AEROLITE (material>39 && material<48)
+
+int equip;
+
+int sharp,heavy,force,tech,strike,slash,thrust,magic;
+int wiR,shR,drR,auR,saR,gnR,jiR,unR;
 
 char *equip_list=
 " 1 Knife    12 Shield  \n"
@@ -13,6 +22,46 @@ char *equip_list=
 "10 Flail    21 Armor   \n"
 "11 Bow      22 Mantle  \n"
 "            23 Pendant \n";
+
+void get_equipment(void){
+	char dump[256];
+	printf(equip_list);
+	while(scanf("%d",&equip)==0 || equip>23 || equip<1){
+		scanf("%s",dump);
+		printf(equip_list);
+	}
+}
+
+char *material_list=
+" 1 MenosBronze  21 Obsidian     41 HalleyRock   \n"
+" 2 ForsenaIron  22 PedanStone   42 AnkhRock     \n"
+" 3 GranzSteel   23 Gaeus'sTears 43 VinekRock    \n"
+" 4 LorantSilver 24 AnimalHide   44 TuttleRock   \n"
+" 5 WendelSilver 25 GatorSkin    45 NemesisRock  \n"
+" 6 VizelGold    26 CentaurHide  46 BiellaRock   \n"
+" 7 IshePlatinum 27 DragonSkin   47 SwifteRock   \n"
+" 8 LorimarIron  28 FishScales   48 Adamantite   \n"
+" 9 AltenaAlloy  29 LizardScales 49 Fullmetal    \n"
+"10 MaiaLead     30 SnakeScales  50 Coral        \n"
+"11 Orihalcon    31 DragonScales 51 TortoiseShell\n"
+"12 OakWood      32 AnimalBone   52 Shell        \n"
+"13 HollyWood    33 Ivory        53 Emerald      \n"
+"14 BaobabWood   34 CursedBone   54 Pearl        \n"
+"15 EbonyWood    35 Fossil       55 LapisLazuli  \n"
+"16 MapleWood    36 ToppleCotton \n"
+"17 DiorWood     37 Sultan'sSilk \n"
+"18 AshWood      38 JuddHemp     \n"
+"19 FossilWood   39 AltenaFelt   \n"
+"20 Marble       40 JacobiniRock \n";
+
+void get_material(void){
+	char dump[256];
+	printf(material_list);
+	while(scanf("%d",&material)==0 || material>55 || material<1){
+		scanf("%s",dump);
+		printf(material_list);
+	}
+}
 
 int equip_props[24][4]={
  0, 0, 0, 0, /*No Wep  */
@@ -40,28 +89,6 @@ int equip_props[24][4]={
  4, 4, 4,12, /*Mantle  */
  0, 0, 0,24  /*Pendant */
 };
-
-char *material_list=
-" 1 MenosBronze  21 Obsidian     41 HalleyRock   \n"
-" 2 ForsenaIron  22 PedanStone   42 AnkhRock     \n"
-" 3 GranzSteel   23 Gaeus'sTears 43 VinekRock    \n"
-" 4 LorantSilver 24 AnimalHide   44 TuttleRock   \n"
-" 5 WendelSilver 25 GatorSkin    45 NemesisRock  \n"
-" 6 VizelGold    26 CentaurHide  46 BiellaRock   \n"
-" 7 IshePlatinum 27 DragonSkin   47 SwifteRock   \n"
-" 8 LorimarIron  28 FishScales   48 Adamantite   \n"
-" 9 AltenaAlloy  29 LizardScales 49 Fullmetal    \n"
-"10 MaiaLead     30 SnakeScales  50 Coral        \n"
-"11 Orihalcon    31 DragonScales 51 TortoiseShell\n"
-"12 OakWood      32 AnimalBone   52 Shell        \n"
-"13 HollyWood    33 Ivory        53 Emerald      \n"
-"14 BaobabWood   34 CursedBone   54 Pearl        \n"
-"15 EbonyWood    35 Fossil       55 LapisLazuli  \n"
-"16 MapleWood    36 ToppleCotton \n"
-"17 DiorWood     37 Sultan'sSilk \n"
-"18 AshWood      38 JuddHemp     \n"
-"19 FossilWood   39 AltenaFelt   \n"
-"20 Marble       40 JacobiniRock \n";
 
 /* growth control[1], weapon stats[4], armor stats[4], resistances[8], {cost[1]} */
 
@@ -124,79 +151,79 @@ int mat_props[56][17]={
  8,  2, 2, 2, 2,  1, 1, 1,50,  8, 8, 8, 8, 8, 8, 8, 8  /*LapisLazuli  */
 };
 
-MATERIAL mat_type[56]={
-NO_MAT,
-METAL, /*11*/
-METAL,
-METAL,
-METAL,
-METAL,
-METAL,
-METAL,
-METAL,
-METAL,
-METAL,
-METAL,
-WOOD, /*8*/
-WOOD,
-WOOD,
-WOOD,
-WOOD,
-WOOD,
-WOOD,
-WOOD,
-STONE, /*4*/
-STONE,
-STONE,
-STONE,
-HIDE, /*4*/
-HIDE,
-HIDE,
-HIDE,
-SCALE, /*4*/
-SCALE,
-SCALE,
-SCALE,
-BONE, /*4*/
-BONE,
-BONE,
-BONE,
-FABRIC,/*4*/
-FABRIC,
-FABRIC,
-FABRIC,
-AEROLITE, /*8*/
-AEROLITE,
-AEROLITE,
-AEROLITE,
-AEROLITE,
-AEROLITE,
-AEROLITE,
-AEROLITE,
-NONE, /*8*/
-NONE,
-NONE,
-NONE,
-NONE,
-NONE,
-NONE,
-NONE
+void material_init(void){
+	 sharp=mat_props[material][1];
+	 heavy=mat_props[material][2];
+	 force=mat_props[material][3];
+	  tech=mat_props[material][4];
+	strike=mat_props[material][5];
+	 slash=mat_props[material][6];
+	thrust=mat_props[material][7];
+	 magic=mat_props[material][8];
+	   wiR=mat_props[material][9];
+	   shR=mat_props[material][10];
+	   drR=mat_props[material][11];
+	   auR=mat_props[material][12];
+	   saR=mat_props[material][13];
+	   gnR=mat_props[material][14];
+	   jiR=mat_props[material][15];
+	   unR=mat_props[material][16];
+}
+
+void print_attack(void){
+	int attack;
+	if(equip<12){ /* weapon */
+		attack=sharp*equip_props[equip][0]+
+			heavy*equip_props[equip][1]+
+			force*equip_props[equip][2]+
+			tech*equip_props[equip][3];
+		attack=attack*(mat_props[material][0]+ESSTOTAL)/
+			mat_props[material][0]/128;
+		if(attack>999){
+			attack=999;
+		}
+	} else { /* armor */
+		attack=strike*equip_props[equip][0]/64+
+			slash*equip_props[equip][1]/64+
+			thrust*equip_props[equip][2]/64+
+			magic*equip_props[equip][3]/64;
+	}
+	printf("%d",attack);
+}
+
+char *mat_word[56]={
+"No Material","MenosBronze","ForsenaIron","GranzSteel","LorantSilver",
+"WendelSilver","VizelGold","IshePlatinum","LorimarIron","AltenaAlloy",
+"MaiaLead","Orihalcon","OakWood","HollyWood","BaobabWood","EbonyWood",
+"MapleWood","DiorWood","AshWood","FossilWood","Marble","Obsidian",
+"PedanStone","Gaeus'sTears","AnimalHide","GatorSkin","CentaurHide",
+"DragonSkin","FishScales","LizardScales","SnakeScales","DragonScales",
+"AnimalBone","Ivory","CursedBone","Fossil","ToppleCotton","Sultan'sSilk",
+"JuddHemp","AltenaFelt","JacobiniRock","HalleyRock","AnkhRock","VinekRock",
+"TuttleRock","NemesisRock","BiellaRock","SwifteRock","Adamantite",
+"Fullmetal","Coral","TortoiseShell","Shell","Emerald","Pearl","LapisLazuli"
 };
 
-void mat_code(MATERIAL mat){
-	switch(mat){
-	case WOOD:
+void print_material(void){
+	printf(mat_word[material]);
+}
+
+char *equip_word[24]={
+"No Wep","Knife","Sword","Axe","2H Sword","2H Axe","Hammer","Spear",
+"Staff","Glove","Flail","Bow","Shield","Helm","Hat","Hauberk","Robe",
+"Gauntlet","Ring","Boots","Sandals","Armor","Mantle","Pendant"
+};
+
+void print_equipment(void){
+	printf(equip_word[equip]);
+}
+
+void material_code(void){
+	if(WOOD){
 		taint(DRYAD);
 		if(energy>=8){prehidden=dryad;}
-		break;
-	case AEROLITE:
-/*
- *If Tempered Item ID == 255(Dummy Item) Then:  (???)
- *  Sala EssLv = 4
- *End If
- */
+	} else if(AEROLITE){
 		decrease(SALA);
-		break;
 	}
 }
 

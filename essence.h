@@ -1,14 +1,10 @@
-int energy;
+#include "stdio.h"
 
-/* essence levels */
-int wi,sh,dr,au,sa,gn,ji,un;
+/* from cards.c */
+typedef enum { NONE,YGGDRASIL,HEAVENS_SCALE,DYING_EARTH,RAGNAROK,
+	ANCIENT_MOON,MIRRORED_WORLD,BED_OF_THORN } WORLD_CARD;
+WORLD_CARD awc;
 
-/* level raise */
-int drLR,auLR,saLR,gnLR,jiLR,unLR;
 
-#define ESSTOTAL (wi+sh+dr+au+sa+gn+ji+un)
-
-typedef enum { WISP,SHADE,DRYAD,AURA,SALA,GNOME,JINN,UNDINE } ESSENCE;
-void taint(ESSENCE);
-void decrease(ESSENCE);
-void increase(ESSENCE);
+/* from material.c */
+int wiR,shR,drR,auR,saR,gnR,jiR,unR;

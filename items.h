@@ -1,133 +1,109 @@
-typedef enum { STICKY,UNSTICKY } STICKY_F;
+#include "stdio.h"
 
-STICKY_F sticky;
+/* from material.c */
+int sharp,heavy,force,tech,strike,slash,thrust,magic;
 
-typedef enum { IPRINT,ENERGY,CODE } ITEM_F;
-typedef void (item_function)(ITEM_F);
+int material;
+#define HIDE (material>23 && material<28)
 
-item_function *if_array[121];
+int equip;
+#define HELM    (13==equip)
+#define HAT     (14==equip)
+#define HAUBERK (15==equip)
+#define BOOTS   (19==equip)
+#define SANDLES (20==equip)
 
-char *item_list;
+void perc150(int *);
+void perc125(int *);
+void perc75(int *);
+void perc50(int *);
 
-item_function
-no_item,
-wisp_gold,
-shade_gold,
-dryad_gold,
-aura_gold,
-sala_gold,
-gnome_gold,
-jinn_gold,
-undine_gold,
-wisp_silver,
-shade_silver,
-dryad_silver,
-aura_silver,
-sala_silver,
-gnome_silver,
-jinn_silver,
-undine_silver,
-fire_stone,
-earth_stone,
-wind_stone,
-water_stone,
-sun_crystal,
-moon_crystal,
-glow_crystal,
-chaos_crystal,
-round_seed,
-oblong_seed,
-crooked_seed,
-big_seed,
-small_seed,
-long_seed,
-flat_seed,
-spiny_seed,
-bellgrapes,
-diceberry,
-mangoelephant,
-loquat_shoes,
-pear_oheels,
-squalphin,
-citrisquid,
-springanana,
-peach_puppy,
-apricat,
-applesocks,
-whalamato,
-pine_oclock,
-fishy_fruit,
-boarmelon,
-rhinoloupe,
-orcaplant,
-garlicrown,
-honey_onion,
-sweet_moai,
-spiny_carrot,
-conchurnip,
-cornflower,
-cabadillo,
-needlettuce,
-cherry_bombs,
-masked_potato,
-lilipods,
-rocket_papaya,
-orangeopus,
-bumpkin,
-heart_mint,
-spade_basil,
-dialaurel,
-gold_clover,
-mush_in_a_box,
-toadstoolshed,
-all_meat,
-sharp_claw,
-poison_fang,
-giants_horn,
-scissors,
-healing_claw,
-zombie_claw,
-vampire_fang,
-little_eye,
-sleepy_eye,
-silly_eye,
-dangerous_eye,
-angry_eye,
-blank_eye,
-wicked_eye,
-creepy_eye,
-angel_feather,
-raven_feather,
-clear_feather,
-moth_wing,
-flaming_quill,
-white_feather,
-aroma_oil,
-dragon_blood,
-acid,
-holy_water,
-ether,
-mercury,
-stinky_breath,
-ghosts_howl,
-dragons_breath,
-virgins_sigh,
-electricity,
-moss,
-ear_of_wheat,
-baked_roach,
-blackened_bat,
-sulpher,
-poison_powder,
-sleepy_powder,
-knockout_dust,
-rust,
-grave_dirt,
-ash,
-hairball,
-needle,
-mirror_piece,
-wad_of_wool,
-messy_scroll,
-greenball_bun,
-tako_bug;
+
+/* from essence.c */
+int energy;
+
+int wi,sh,dr,au,sa,gn,ji,un;
+#define ESSTOTAL (wi+sh+dr+au+sa+gn+ji+un)
+
+typedef enum { WISP,SHADE,DRYAD,AURA,SALA,GNOME,JINN,UNDINE } ESSENCE;
+void taint(ESSENCE);
+
+
+/* from cards.c */
+void unsticky(void);
+
+typedef enum { CPRINT,PREHIDDEN,HIDDEN,FIRST,SECOND,THIRD,LEAVING,WORLD } CARD_F;
+
+typedef void (card_function)(CARD_F);
+
+card_function
+*prehidden,
+no_card,
+yggdrasil,
+ancient_moon,
+mirrored_world,
+heavens_scale,
+dying_earth,
+ragnarok,
+bed_of_thorn,
+volcano,
+metropolis,
+tower,
+spring,
+ruler_of_the_sky,
+mother_of_gods,
+sun_god,
+moon_goddess,
+thunder_god,
+goddess_of_love,
+fertility_goddess,
+ocean_god,
+wind_god,
+wisdom_goddess,
+blacksmith_god,
+god_of_war,
+fallen_angel,
+witch_of_moon,
+lord_of_flies,
+wings_of_darkness,
+god_of_destruction,
+beast_headed_god,
+leviathan,
+sage,
+man_of_valor,
+wanderer,
+sacrificed_nymph,
+enticed_nymph,
+nymph_of_the_sky,
+nymph_of_orchards,
+nymph_of_dawn,
+spirit_of_ocean,
+spirit_of_forest,
+spirit_of_mountain,
+spirit_of_shoes,
+spirit_of_housework,
+pixie_of_pride,
+pixie_of_laziness,
+pixie_of_jealousy,
+pixie_of_lust,
+pixie_of_rage,
+pixie_of_gluttony,
+pixie_of_greed,
+phoenix,
+unicorn,
+wisp,
+shade,
+dryad,
+aura,
+sala,
+gnome,
+jinn,
+undine,
+raven,
+wolf,
+sorcerer,
+witch,
+king,
+princess,
+clown,
+cleric;
