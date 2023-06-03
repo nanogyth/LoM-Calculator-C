@@ -260,11 +260,27 @@ void princess(CARD_F card_f){
 void clown(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Clown");break;
+	case FIRST:
+	case SECOND:
+	case THIRD:
+		perc150(&sharp);
+		perc50(&heavy);
+		perc150(&thrust);
+		perc50(&strike);
+		break;
 	}
 }
 void cleric(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Cleric");break;
+	case FIRST:
+	case SECOND:
+	case THIRD:
+		perc50(&sharp);
+		perc150(&heavy);
+		perc150(&strike);
+		perc50(&slash);
+		break;
 	}
 }
 void ruler_of_the_sky(CARD_F card_f){
@@ -500,16 +516,39 @@ void bed_of_thorn(CARD_F card_f){
 	case CPRINT:	printf("Bed of Thorn");break;
 	case HIDDEN: if(awc!=NONE&&awc!=BED_OF_THORN){hidden=no_card;}break;
 	case  WORLD: if(awc==NONE){awc=BED_OF_THORN;}break;
+	case FIRST:
+	case SECOND:
+	case THIRD:
+		perc150(&strike);
+		perc150(&slash);
+		perc150(&thrust);
+		perc150(&magic);
+		break;
 	}
 }
 void volcano(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Volcano");break;
+	case FIRST:
+	case SECOND:
+	case THIRD:
+		perc150(&force);
+		perc50(&tech);
+		break;
 	}
 }
 void metropolis(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Metropolis");break;
+	case FIRST:
+	case SECOND:
+	case THIRD:
+		if(16==equip){ /* robe */
+			perc150(&magic);
+		} else {
+			perc125(&magic);
+		}
+		break;
 	}
 }
 void tower(CARD_F card_f){

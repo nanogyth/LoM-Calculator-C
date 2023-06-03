@@ -10,7 +10,13 @@
 
 typedef enum { CPRINT,PREHIDDEN,HIDDEN,FIRST,SECOND,THIRD,LEAVING,WORLD } CARD_F;
 
+typedef enum { NONE,YGGDRASIL,HEAVENS_SCALE,DYING_EARTH,RAGNAROK,
+	ANCIENT_MOON,MIRRORED_WORLD,BED_OF_THORN } WORLD_CARD;
+WORLD_CARD awc;
+
 typedef void (card_function)(CARD_F);
+
+card_function *prehidden,*hidden,*first,*second,*third,*leaving;
 
 card_function
 no_card,
