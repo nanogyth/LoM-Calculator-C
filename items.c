@@ -15,7 +15,9 @@ void item_code(void){
 	item(CODE);
 }
 void print_item(void){
+	printf("Last Item: ");
 	item(IPRINT);
+	printf("\n");
 }
 
 char *item_list=
@@ -404,7 +406,7 @@ void loquat_shoes(ITEM_F item_f){
 	case IPRINT: printf("Loquat-Shoes");break;
 	case ENERGY: energy=16;break;
 	case   CODE:
-		if(BOOTS||SANDLES){
+		if(BOOTS||SHOES){
 			perc125(&strike);
 			perc125(&slash);
 			perc125(&thrust);
@@ -418,7 +420,7 @@ void pear_oheels(ITEM_F item_f){
 	case IPRINT: printf("Pear O'Heels");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
-		if(BOOTS||SANDLES){
+		if(BOOTS||SHOES){
 			perc125(&strike);
 			perc125(&slash);
 			perc125(&thrust);
@@ -1318,4 +1320,8 @@ void get_item(void){
 		if(STR_IS("/")){pretty_print();}
 	}
 	item=if_array[item_code];
+}
+
+void init_item(void){
+	item=no_item;
 }
