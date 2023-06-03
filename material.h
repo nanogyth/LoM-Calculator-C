@@ -2,10 +2,10 @@
 typedef enum { CPRINT,PREHIDDEN,HIDDEN,FIRST,SECOND,THIRD,LEAVING,WORLD } CARD_F;
 typedef void (card_function)(CARD_F);
 card_function *prehidden, *hidden, *first, *second, *third, phoenix, witch, raven, wolf, dryad;
-int card_price(void);
+
 
 /* from essence.c */
-int energy_ge(int);
+int energy; /* WOOD material code */
 
 int wi,sh,dr,au,sa,gn,ji,un;
 #define ESSTOTAL (wi+sh+dr+au+sa+gn+ji+un) /* growth control */

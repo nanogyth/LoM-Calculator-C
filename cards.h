@@ -26,7 +26,7 @@ int equip;
 #define ROBE    (16==equip)
 #define RING    (18==equip)
 #define BOOTS   (19==equip)
-#define SHOES   (20==equip)
+#define SANDALS (20==equip)
 #define MANTLE  (22==equip)
 #define PENDANT (23==equip)
 

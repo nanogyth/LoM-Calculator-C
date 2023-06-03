@@ -9,21 +9,13 @@ typedef enum { WISP,SHADE,DRYAD,AURA,SALA,GNOME,JINN,UNDINE } ESSENCE;
 
 int power2[16]={1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768};
 
-int energy_ge(int E){return (energy>=E);}
-
 void init_essences(void){
 	wi=0;sh=0;dr=0;au=0;sa=0;gn=0;ji=0;un=0;
 	drLR=0;auLR=0;saLR=0;gnLR=0;jiLR=0;unLR=0;
 }
 
 void print_essences(void){
-	printf(" %2d %2d %2d %2d %2d %2d %2d %2d",
-	wi,sh,dr,au,sa,gn,ji,un);
-}
-
-void print_resists(void){
-	printf("Resists: %2d %2d %2d %2d %2d %2d %2d %2d\n",
-	wiR,shR,drR,auR,saR,gnR,jiR,unR);
+	printf(" %2d %2d %2d %2d %2d %2d %2d %2d",wi,sh,dr,au,sa,gn,ji,un);
 }
 
 void increase(ESSENCE essence){
@@ -62,7 +54,7 @@ void decrease(ESSENCE essence){
 }
 
 void taint(ESSENCE essence){
-if( ancient_world() ){
+if( ANCIENT_MOON==awc ){
 	switch(essence){
 	case   WISP:if(energy>=8){ increase( WISP); }break;
 	case  SHADE:if(energy>=8){ increase(SHADE); }break;
@@ -73,7 +65,7 @@ if( ancient_world() ){
 	case   JINN:if(energy>=8){          jiLR++; }break;
 	case UNDINE:if(energy>=8){          unLR++; }break;
 	}
-} else if( mirror_world() ){
+} else if( MIRRORED_WORLD==awc ){
 	switch(essence){
 	case   WISP:
 		if( 0==sh && energy>=8 ){ increase(WISP); }

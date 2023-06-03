@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "cards.h"
 
-typedef enum { CPRINT,PREHIDDEN,HIDDEN,FIRST,SECOND,THIRD,LEAVING,WORLD,PRICE } CARD_F;
+typedef enum { CPRINT,PREHIDDEN,HIDDEN,FIRST,SECOND,THIRD,LEAVING,WORLD } CARD_F;
 
 typedef void (card_function)(CARD_F);
 
@@ -15,9 +15,6 @@ god_of_destruction,leviathan,beast_headed_god,enticed_nymph,metropolis;
 typedef enum { NONE,YGGDRASIL,HEAVENS_SCALE,DYING_EARTH,RAGNAROK,
 	ANCIENT_MOON,MIRRORED_WORLD,BED_OF_THORN } WORLD_CARD;
 WORLD_CARD awc;
-
-int ancient_world(void){return   (ANCIENT_MOON==awc);}
-int  mirror_world(void){return (MIRRORED_WORLD==awc);}
 
 void set_active_world_card(void){
 	awc=NONE;
@@ -37,19 +34,6 @@ void sub_init_cards(void){
 
 void unsticky(void){
 	sticky=UNSTICKY;
-}
-
-int price;
-
-int card_price(void){
-	price=0;
-
-	hidden(PRICE);
-	 first(PRICE);
-	second(PRICE);
-	 third(PRICE);
-
-	return price;
 }
 
 #define PIXIE(pos) (pixie_of_jealousy==(pos)||pixie_of_laziness==(pos)||\
@@ -95,24 +79,22 @@ void activate_cards(void){
 }
 
 void print_cards(void){
-	    printf("Cards:\t(");
+	    printf("\t(");
 	 hidden(CPRINT);printf(")\n\t ");
 	  first(CPRINT);printf("\n\t ");
 	 second(CPRINT);printf("\n\t ");
 	  third(CPRINT);printf("\n\t>");
-	leaving(CPRINT);printf(">\n");
+	leaving(CPRINT);printf(">");
 }
 
 void no_card(CARD_F card_f){
 	switch(card_f){
-	case CPRINT:	printf("--");break;
-	case  PRICE:	price+=0;break;
+	case CPRINT: printf("--");break;
 	}
 }
 void wisp(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Wisp");break;
-	case  PRICE:	price+=250;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -124,7 +106,6 @@ void wisp(CARD_F card_f){
 void shade(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Shade");break;
-	case  PRICE:	price+=250;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -136,7 +117,6 @@ void shade(CARD_F card_f){
 void dryad(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Dryad");break;
-	case  PRICE:	price+=250;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -148,7 +128,6 @@ void dryad(CARD_F card_f){
 void aura(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Aura");break;
-	case  PRICE:	price+=250;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -160,7 +139,6 @@ void aura(CARD_F card_f){
 void sala(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Salamander");break;
-	case  PRICE:	price+=250;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -172,7 +150,6 @@ void sala(CARD_F card_f){
 void gnome(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Gnome");break;
-	case  PRICE:	price+=250;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -184,7 +161,6 @@ void gnome(CARD_F card_f){
 void jinn(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Jinn");break;
-	case  PRICE:	price+=250;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -196,7 +172,6 @@ void jinn(CARD_F card_f){
 void undine(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Undine");break;
-	case  PRICE:	price+=250;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -208,7 +183,6 @@ void undine(CARD_F card_f){
 void pixie_of_pride(CARD_F card_f){ /* pixie(1) */
 	switch(card_f){
 	case CPRINT:	printf("Pixie of Pride");break;
-	case  PRICE:	price+=150;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -231,7 +205,6 @@ void pixie_of_pride(CARD_F card_f){ /* pixie(1) */
 void pixie_of_laziness(CARD_F card_f){ /* pixie(2) */
 	switch(card_f){
 	case CPRINT:	printf("Pixie of Laziness");break;
-	case  PRICE:	price+=150;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -254,7 +227,6 @@ void pixie_of_laziness(CARD_F card_f){ /* pixie(2) */
 void pixie_of_jealousy(CARD_F card_f){ /* pixie(3) */
 	switch(card_f){
 	case CPRINT:	printf("Pixie of Jealousy");break;
-	case  PRICE:	price+=150;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -277,7 +249,6 @@ void pixie_of_jealousy(CARD_F card_f){ /* pixie(3) */
 void pixie_of_lust(CARD_F card_f){ /* pixie(4) */
 	switch(card_f){
 	case CPRINT:	printf("Pixie of Lust");break;
-	case  PRICE:	price+=150;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -300,7 +271,6 @@ void pixie_of_lust(CARD_F card_f){ /* pixie(4) */
 void pixie_of_rage(CARD_F card_f){ /* pixie(5) */
 	switch(card_f){
 	case CPRINT:	printf("Pixie of Rage");break;
-	case  PRICE:	price+=150;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -323,7 +293,6 @@ void pixie_of_rage(CARD_F card_f){ /* pixie(5) */
 void pixie_of_gluttony(CARD_F card_f){ /* pixie(6) */
 	switch(card_f){
 	case CPRINT:	printf("Pixie of Gluttony");break;
-	case  PRICE:	price+=150;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -346,7 +315,6 @@ void pixie_of_gluttony(CARD_F card_f){ /* pixie(6) */
 void pixie_of_greed(CARD_F card_f){ /* pixie(7) */
 	switch(card_f){
 	case CPRINT:	printf("Pixie of Greed");break;
-	case  PRICE:	price+=150;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -369,7 +337,6 @@ void pixie_of_greed(CARD_F card_f){ /* pixie(7) */
 void sorcerer(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Sorcerer");break;
-	case  PRICE:	price+=300;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -395,7 +362,6 @@ void sorcerer(CARD_F card_f){
 void witch(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Witch");break;
-	case  PRICE:	price+=300;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -421,7 +387,6 @@ void witch(CARD_F card_f){
 void king(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("King");break;
-	case  PRICE:	price+=1500;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -441,7 +406,6 @@ void king(CARD_F card_f){
 void princess(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Princess");break;
-	case  PRICE:	price+=1500;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -457,7 +421,6 @@ void princess(CARD_F card_f){
 void clown(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Clown");break;
-	case  PRICE:	price+=250;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -479,7 +442,6 @@ void clown(CARD_F card_f){
 void cleric(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Cleric");break;
-	case  PRICE:	price+=500;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -505,7 +467,6 @@ void cleric(CARD_F card_f){
 void ruler_of_the_sky(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Ruler of the Sky");break;
-	case  PRICE:	price+=5000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -524,7 +485,6 @@ void ruler_of_the_sky(CARD_F card_f){
 void mother_of_gods(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Mother of Gods");break;
-	case  PRICE:	price+=4000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -545,7 +505,6 @@ void mother_of_gods(CARD_F card_f){
 void sun_god(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Sun God");break;
-	case  PRICE:	price+=3000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -562,7 +521,6 @@ void sun_god(CARD_F card_f){
 void moon_goddess(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Moon Goddess");break;
-	case  PRICE:	price+=3000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -579,7 +537,6 @@ void moon_goddess(CARD_F card_f){
 void thunder_god(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Thunder God");break;
-	case  PRICE:	price+=4000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -598,7 +555,6 @@ void thunder_god(CARD_F card_f){
 void goddess_of_love(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Goddess of Love");break;
-	case  PRICE:	price+=3000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -615,7 +571,6 @@ void goddess_of_love(CARD_F card_f){
 void fertility_goddess(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Fertility Goddess");break;
-	case  PRICE:	price+=3000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -631,7 +586,6 @@ void fertility_goddess(CARD_F card_f){
 void ocean_god(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Ocean God");break;
-	case  PRICE:	price+=3000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -649,7 +603,6 @@ void ocean_god(CARD_F card_f){
 void wind_god(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Wind God");break;
-	case  PRICE:	price+=3000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -659,7 +612,7 @@ void wind_god(CARD_F card_f){
 			/* ??? 80 81 88 7D 80 */
 			plunge1=Caduceus;
 		}
-		if(SHOES){
+		if(SANDALS){
 			strike+=10;
 			slash +=10;
 			thrust+=10;
@@ -672,7 +625,6 @@ void wind_god(CARD_F card_f){
 void wisdom_goddess(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Wisdom Goddess");break;
-	case  PRICE:	price+=3000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -687,7 +639,6 @@ void wisdom_goddess(CARD_F card_f){
 void blacksmith_god(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Blacksmith God");break;
-	case  PRICE:	price+=2800;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -702,7 +653,6 @@ void blacksmith_god(CARD_F card_f){
 void god_of_war(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("God of War");break;
-	case  PRICE:	price+=3000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -717,7 +667,6 @@ void god_of_war(CARD_F card_f){
 void fallen_angel(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Fallen Angel");break;
-	case  PRICE:	price+=6660;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -741,7 +690,6 @@ void fallen_angel(CARD_F card_f){
 void witch_of_moon(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Witch of Moon");break;
-	case  PRICE:	price+=6660;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -765,7 +713,6 @@ void witch_of_moon(CARD_F card_f){
 void lord_of_flies(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Lord of Flies");break;
-	case  PRICE:	price+=6660;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -789,7 +736,6 @@ void lord_of_flies(CARD_F card_f){
 void wings_of_darkness(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Wings of Darkness");break;
-	case  PRICE:	price+=6660;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -813,7 +759,6 @@ void wings_of_darkness(CARD_F card_f){
 void god_of_destruction(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("God of Destruction");break;
-	case  PRICE:	price+=6660;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -838,7 +783,6 @@ void god_of_destruction(CARD_F card_f){
 void beast_headed_god(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Beast-headed God");break;
-	case  PRICE:	price+=6660;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -862,7 +806,6 @@ void beast_headed_god(CARD_F card_f){
 void leviathan(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Leviathan");break;
-	case  PRICE:	price+=6660;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -886,7 +829,6 @@ void leviathan(CARD_F card_f){
 void phoenix(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Phoenix");break;
-	case  PRICE:	price+=2500;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -905,7 +847,6 @@ void phoenix(CARD_F card_f){
 void unicorn(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Unicorn");break;
-	case  PRICE:	price+=2500;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -924,7 +865,6 @@ void unicorn(CARD_F card_f){
 void spirit_of_ocean(CARD_F card_f){ /* spirit(1) */
 	switch(card_f){
 	case CPRINT:	printf("Spirit of Ocean");break;
-	case  PRICE:	price+=800;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -938,7 +878,6 @@ void spirit_of_ocean(CARD_F card_f){ /* spirit(1) */
 void spirit_of_forest(CARD_F card_f){ /* spirit(2) */
 	switch(card_f){
 	case CPRINT:	printf("Spirit of Forest");break;
-	case  PRICE:	price+=800;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -953,7 +892,6 @@ void spirit_of_forest(CARD_F card_f){ /* spirit(2) */
 void spirit_of_mountain(CARD_F card_f){ /* spirirt(3) */
 	switch(card_f){
 	case CPRINT:	printf("Spirit of Mountain");break;
-	case  PRICE:	price+=800;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -968,7 +906,6 @@ void spirit_of_mountain(CARD_F card_f){ /* spirirt(3) */
 void spirit_of_shoes(CARD_F card_f){ /* spirit(4) */
 	switch(card_f){
 	case CPRINT:	printf("Spirit of Shoes");break;
-	case  PRICE:	price+=800;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -976,7 +913,7 @@ void spirit_of_shoes(CARD_F card_f){ /* spirit(4) */
 		if(BOOTS){
 			immunity|=Paralysis;
 		}
-		if(SHOES){
+		if(SANDALS){
 			special=Extra_Exp;
 		}
 		break;
@@ -985,7 +922,6 @@ void spirit_of_shoes(CARD_F card_f){ /* spirit(4) */
 void spirit_of_housework(CARD_F card_f){ /* spirit(5) */
 	switch(card_f){
 	case CPRINT:	printf("Spirit of Housework");break;
-	case  PRICE:	price+=800;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -1004,7 +940,6 @@ void yggdrasil(CARD_F card_f){
 	case CPRINT:	printf("Yggdrasil");break;
 	case HIDDEN: if(awc!=NONE&&awc!=BED_OF_THORN){hidden=no_card;}break;
 	case  WORLD: if(awc==NONE){awc=YGGDRASIL;}break;
-	case  PRICE:	price+=3000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -1019,7 +954,6 @@ void heavens_scale(CARD_F card_f){
 	case CPRINT:	printf("Heaven's Scale");break;
 	case HIDDEN: if(awc!=NONE&&awc!=BED_OF_THORN){hidden=no_card;}break;
 	case  WORLD: if(awc==NONE){awc=HEAVENS_SCALE;}break;
-	case  PRICE:	price+=1800;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -1032,7 +966,6 @@ void dying_earth(CARD_F card_f){
 	case CPRINT:	printf("Dying Earth");break;
 	case HIDDEN: if(awc!=NONE&&awc!=BED_OF_THORN){hidden=no_card;}break;
 	case  WORLD: if(awc==NONE){awc=DYING_EARTH;}break;
-	case  PRICE:	price+=2600;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -1048,7 +981,6 @@ void ragnarok(CARD_F card_f){
 	case CPRINT:	printf("Ragnarok");break;
 	case HIDDEN: if(awc!=NONE&&awc!=BED_OF_THORN){hidden=no_card;}break;
 	case  WORLD: if(awc==NONE){awc=RAGNAROK;}break;
-	case  PRICE:	price+=10000;break;
 	case  FIRST:
 	case SECOND:
 	case  THIRD:
@@ -1063,7 +995,6 @@ void ancient_moon(CARD_F card_f){
 	case CPRINT:	printf("Ancient Moon");break;
 	case HIDDEN: if(awc!=NONE&&awc!=BED_OF_THORN){hidden=no_card;}break;
 	case  WORLD: if(awc==NONE){awc=ANCIENT_MOON;}break;
-	case  PRICE:	price+=2200;break;
 	}
 }
 void mirrored_world(CARD_F card_f){
@@ -1071,17 +1002,16 @@ void mirrored_world(CARD_F card_f){
 	case CPRINT:	printf("Mirrored World");break;
 	case HIDDEN: if(awc!=NONE&&awc!=BED_OF_THORN){hidden=no_card;}break;
 	case  WORLD: if(awc==NONE){awc=MIRRORED_WORLD;}break;
-	case  PRICE:	price+=2200;break;
 	}
 }
 void bed_of_thorn(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Bed of Thorn");break;
+	case HIDDEN: if(awc!=NONE&&awc!=BED_OF_THORN){hidden=no_card;}break;
 	case  WORLD: if(awc==NONE){awc=BED_OF_THORN;}break;
-	case  PRICE:	price+=1500;break;
-	case  FIRST:
+	case FIRST:
 	case SECOND:
-	case  THIRD:
+	case THIRD:
 		stat_limits(-1,3,ALL);
 		special=No_Regen;
 		perc150(&strike);
@@ -1094,7 +1024,6 @@ void bed_of_thorn(CARD_F card_f){
 void volcano(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Volcano");break;
-	case  PRICE:	price+=1300;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1112,7 +1041,6 @@ void volcano(CARD_F card_f){
 void metropolis(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Metropolis");break;
-	case  PRICE:	price+=1500;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1128,7 +1056,6 @@ void metropolis(CARD_F card_f){
 void tower(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Tower");break;
-	case  PRICE:	price+=1500;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1139,7 +1066,6 @@ void tower(CARD_F card_f){
 void spring(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Spring");break;
-	case  PRICE:	price+=1500;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1156,7 +1082,6 @@ void spring(CARD_F card_f){
 void sacrificed_nymph(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Sacrificed Nymph");break;
-	case  PRICE:	price+=1000;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1169,7 +1094,6 @@ void sacrificed_nymph(CARD_F card_f){
 void nymph_of_the_sky(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Nymph of the Sky");break;
-	case  PRICE:	price+=1000;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1182,7 +1106,6 @@ void nymph_of_the_sky(CARD_F card_f){
 void nymph_of_orchards(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Nymph of Orchards");break;
-	case  PRICE:	price+=1000;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1195,13 +1118,11 @@ void nymph_of_orchards(CARD_F card_f){
 void enticed_nymph(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Enticed Nymph");break;
-	case  PRICE:	price+=1000;break;
 	}
 }
 void sage(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Sage");break;
-	case  PRICE:	price+=1000;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1217,7 +1138,6 @@ void sage(CARD_F card_f){
 void man_of_valor(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Man of Valor");break;
-	case  PRICE:	price+=1000;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1233,7 +1153,6 @@ void man_of_valor(CARD_F card_f){
 void wanderer(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Wanderer");break;
-	case  PRICE:	price+=1000;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1249,7 +1168,6 @@ void wanderer(CARD_F card_f){
 void nymph_of_dawn(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Nymph of Dawn");break;
-	case  PRICE:	price+=1000;break;
 	case SECOND:
 	case  THIRD:
 		if(energy<=24){
@@ -1265,7 +1183,6 @@ void nymph_of_dawn(CARD_F card_f){
 void raven(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Raven");break;
-	case  PRICE:	price+=300;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:
@@ -1279,7 +1196,6 @@ void raven(CARD_F card_f){
 void wolf(CARD_F card_f){
 	switch(card_f){
 	case CPRINT:	printf("Wolf");break;
-	case  PRICE:	price+=300;break;
 	case FIRST:
 	case SECOND:
 	case THIRD:

@@ -204,5 +204,5 @@ void calculate_stats(void){
 }
 
 void print_stats(void){
-	printf("Stats  :%3d%3d%3d%3d%3d%3d%3d%3d\n",pwr,skl,def,mag,hp,spr,chm,lck);
+	printf("%3d%3d%3d%3d%3d%3d%3d%3d",pwr,skl,def,mag,hp,spr,chm,lck);
 }
