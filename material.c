@@ -1,5 +1,46 @@
 #include "calc.h"
 
+char *equip_list=
+" 1 Knife    12 Shield  \n"
+" 2 Sword    13 Helm    \n"
+" 3 Axe      14 Hat     \n"
+" 4 2H Sword 15 Hauberk \n"
+" 5 2H Axe   16 Robe    \n"
+" 6 Hammer   17 Gauntlet\n"
+" 7 Spear    18 Ring    \n"
+" 8 Staff    19 Boots   \n"
+" 9 Glove    20 Sandels \n"
+"10 Flail    21 Armor   \n"
+"11 Bow      22 Mantle  \n"
+"            23 Pendant \n";
+
+int equip_props[24][4]={
+ 0, 0, 0, 0, /*No Wep  */
+44,16,12,48, /*Knife   */
+32,32,32,32, /*Sword   */
+28,36,48,16, /*Axe     */
+40,40,40,40, /*2H Sword*/
+40,40,64,16, /*2H Axe  */
+ 8,72,64,16, /*Hammer  */
+52,20,24,48, /*Spear   */
+ 4,44,16,32, /*Staff   */
+ 0,32,24,56, /*Glove   */
+ 0,40,28,44, /*Flail   */
+40, 4,20,40, /*Bow     */
+ 8, 8, 8, 4, /*Shield  */
+ 8, 7, 6, 2, /*Helm    */
+ 4, 2, 2, 4, /*Hat     */
+12,16,16, 2, /*Hauberk */
+ 6, 6, 6, 8, /*Robe    */
+ 7, 6, 8, 2, /*Gauntlet*/
+ 1, 1, 1,16, /*Ring    */
+ 6, 8, 7, 2, /*Boots   */
+ 2, 4, 2, 4, /*Sandals */
+26,26,26, 4, /*Armor   */
+ 4, 4, 4,12, /*Mantle  */
+ 0, 0, 0,24  /*Pendant */
+};
+
 char *material_list=
 " 1 MenosBronze  21 Obsidian     41 HalleyRock   \n"
 " 2 ForsenaIron  22 PedanStone   42 AnkhRock     \n"
@@ -21,7 +62,6 @@ char *material_list=
 "18 AshWood      38 JuddHemp     \n"
 "19 FossilWood   39 AltenaFelt   \n"
 "20 Marble       40 JacobiniRock \n";
-
 
 /* growth control[1], weapon stats[4], armor stats[4], resistances[8], {cost[1]} */
 
@@ -150,41 +190,27 @@ void mat_code(MATERIAL mat){
 		if(energy>=8){prehidden=dryad;}
 		break;
 	case AEROLITE:
+/*
+ *If Tempered Item ID == 255(Dummy Item) Then:  (???)
+ *  Sala EssLv = 4
+ *End If
+ */
 		decrease(SALA);
 		break;
 	}
 }
 
-char *weapon_list=
-" 1 Knife   \n 2 Sword   \n 3 Axe     \n 4 2H Sword\n"
-" 5 2H Axe  \n 6 Hammer  \n 7 Spear   \n 8 Staff   \n"
-" 9 Glove   \n10 Flail   \n11 Bow     \n";
-
-int weapon[11][4]={
-44,16,12,48, /*Knife   */
-32,32,32,32, /*Sword   */
-28,36,48,16, /*Axe     */
-40,40,40,40, /*2H Sword*/
-40,40,64,16, /*2H Axe  */
- 8,72,64,16, /*Hammer  */
-52,20,24,48, /*Spear   */
- 4,44,16,32, /*Staff   */
- 0,32,24,56, /*Glove   */
- 0,40,28,44, /*Flail   */
-40, 4,20,40  /*Bow     */
-};
-
-int armor[12][4]={
- 8, 8, 8, 4, /*Shield  */
- 8, 7, 6, 2, /*Helm    */
- 4, 2, 2, 4, /*Hat     */
-12,16,16, 2, /*Hauberk */
- 6, 6, 6, 8, /*Robe    */
- 7, 6, 8, 2, /*Gauntlet*/
- 1, 1, 1,16, /*Ring    */
- 6, 8, 7, 2, /*Boots   */
- 2, 4, 2, 4, /*Sandals */
-26,26,26, 4, /*Armor   */
- 4, 4, 4,12, /*Mantle  */
- 0, 0, 0,24  /*Pendant */
-};
+void perc150(int *num){
+        *num=*num*3/2;
+        if(*num>255){*num=255;}
+}
+void perc125(int *num){
+        *num=*num*5/4;
+        if(*num>255){*num=255;}
+}
+void perc75(int *num){
+        *num=*num*3/4;
+}
+void perc50(int *num){
+        *num=*num/2;
+}

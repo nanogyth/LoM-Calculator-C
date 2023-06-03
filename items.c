@@ -403,6 +403,11 @@ void loquat_shoes(ITEM_F item_f){
 	case IPRINT: printf("Loquat-Shoes");break;
 	case ENERGY: energy=16;break;
 	case   CODE:
+		if(19==equip||20==equip){ /* boots/sandles */
+			perc125(&strike);
+			perc125(&slash);
+			perc125(&thrust);
+		}
 		if( energy>=16 ){prehidden=spirit_of_shoes;}
 		break;
 	}
@@ -412,6 +417,11 @@ void pear_oheels(ITEM_F item_f){
 	case IPRINT: printf("Pear O'Heels");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		if(19==equip||20==equip){ /* boots/sandles */
+			perc125(&strike);
+			perc125(&slash);
+			perc125(&thrust);
+		}
 		if( energy>=16 ){prehidden=spirit_of_shoes;}
 		break;
 	}
@@ -430,7 +440,12 @@ void citrisquid(ITEM_F item_f){
 	switch(item_f){
 	case IPRINT: printf("Citrisquid");break;
 	case ENERGY: energy=8;break;
-	case   CODE: break;
+	case   CODE:
+		perc75(&sharp);
+		perc125(&heavy);
+		perc75(&slash);
+		perc125(&strike);
+		break;
 	}
 }
 void springanana(ITEM_F item_f){
@@ -448,6 +463,8 @@ void peach_puppy(ITEM_F item_f){
 	case ENERGY: energy=24;break;
 	case   CODE:
 		if( energy>=8 ){prehidden=wolf;}
+		perc125(&sharp);
+		perc75(&heavy);
 		break;
 	}
 }
@@ -455,7 +472,10 @@ void apricat(ITEM_F item_f){
 	switch(item_f){
 	case IPRINT: printf("Apricat");break;
 	case ENERGY: energy=8;break;
-	case   CODE: break;
+	case   CODE:
+		perc75(&force);
+		perc125(&tech);
+		break;
 	}
 }
 void applesocks(ITEM_F item_f){
@@ -509,7 +529,9 @@ void rhinoloupe(ITEM_F item_f){
 	switch(item_f){
 	case IPRINT: printf("Rhinoloupe");break;
 	case ENERGY: energy=32;break;
-	case   CODE: break;
+	case   CODE:
+		perc125(&sharp);
+		break;
 	}
 }
 void orcaplant(ITEM_F item_f){
@@ -546,7 +568,17 @@ void sweet_moai(ITEM_F item_f){
 	switch(item_f){
 	case IPRINT: printf("Sweet Moai");break;
 	case ENERGY: energy=32;break;
-	case   CODE: break;
+	case   CODE:
+		if(13==equip){ /* helm */
+			perc125(&strike);
+			perc125(&slash);
+			perc125(&thrust);
+		} else if(14==equip){ /* hat */
+			perc150(&strike);
+			perc150(&slash);
+			perc150(&thrust);
+		}
+		break;
 	}
 }
 void spiny_carrot(ITEM_F item_f){
@@ -554,6 +586,8 @@ void spiny_carrot(ITEM_F item_f){
 	case IPRINT: printf("Spiny Carrot");break;
 	case ENERGY: energy=8;break;
 	case   CODE:
+		perc125(&sharp);
+		perc75(&heavy);
 		taint(UNDINE);
 		break;
 	}
@@ -580,7 +614,14 @@ void cabadillo(ITEM_F item_f){
 	switch(item_f){
 	case IPRINT: printf("Cabadillo");break;
 	case ENERGY: energy=8;break;
-	case   CODE: break;
+	case   CODE:
+		if(15==equip){ /* hauberk */
+			perc125(&strike);
+			perc125(&slash);
+			perc125(&thrust);
+			perc50(&magic);
+		}
+		break;
 	}
 }
 void needlettuce(ITEM_F item_f){
@@ -588,6 +629,8 @@ void needlettuce(ITEM_F item_f){
 	case IPRINT: printf("Needlettuce");break;
 	case ENERGY: energy=24;break;
 	case   CODE:
+		perc125(&sharp);
+		perc75(&heavy);
 		if( 0==sa && dr>0 && energy>=8 ){prehidden=bed_of_thorn;}
 		break;
 	}
@@ -603,7 +646,10 @@ void masked_potato(ITEM_F item_f){
 	switch(item_f){
 	case IPRINT: printf("Masked Potato");break;
 	case ENERGY: energy=24;break;
-	case   CODE: break;
+	case   CODE:
+		perc75(&sharp);
+		perc125(&heavy);
+		break;
 	}
 }
 void lilipods(ITEM_F item_f){
@@ -656,6 +702,7 @@ void spade_basil(ITEM_F item_f){
 	case IPRINT: printf("Spade Basil");break;
 	case ENERGY: energy=16;break;
 	case   CODE:
+		perc125(&sharp);
 		if( wi>=3 && ESSTOTAL>=6 && energy>=8 ){prehidden=ruler_of_the_sky;}
 		break;
 	}
@@ -673,7 +720,9 @@ void gold_clover(ITEM_F item_f){
 	switch(item_f){
 	case IPRINT: printf("Gold Clover");break;
 	case ENERGY: energy=64;break;
-	case   CODE: break;
+	case   CODE:
+		perc125(&heavy);
+		break;
 	}
 }
 void mush_in_a_box(ITEM_F item_f){
@@ -706,6 +755,8 @@ void sharp_claw(ITEM_F item_f){
 	case IPRINT: printf("Sharp Claw");break;
 	case ENERGY: energy=24;break;
 	case   CODE:
+		perc150(&sharp);
+		perc50(&heavy);
 		if( 0==un && sa>=5 && energy>=8 ){prehidden=god_of_destruction;}
 		break;
 	}
@@ -715,6 +766,8 @@ void poison_fang(ITEM_F item_f){
 	case IPRINT: printf("Poison Fang");break;
 	case ENERGY: energy=8;break;
 	case   CODE:
+		perc50(&force);
+		perc150(&tech);
 		if( 0==au && dr>=5 && energy>=8 ){prehidden=beast_headed_god;}
 		break;
 	}
@@ -724,6 +777,8 @@ void giants_horn(ITEM_F item_f){
 	case IPRINT: printf("Giant's Horn");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		perc50(&sharp);
+		perc150(&heavy);
 		if( 0==sa && gn>=5 && energy>=8 ){prehidden=leviathan;}
 		break;
 	}
@@ -732,7 +787,10 @@ void scissors(ITEM_F item_f){
 	switch(item_f){
 	case IPRINT: printf("Scissors");break;
 	case ENERGY: energy=16;break;
-	case   CODE: break;
+	case   CODE:
+		perc150(&force);
+		perc50(&tech);
+		break;
 	}
 }
 void healing_claw(ITEM_F item_f){
@@ -765,6 +823,7 @@ void little_eye(ITEM_F item_f){
 	case IPRINT: printf("Little Eye");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		perc125(&slash);
 		if( energy>=4 ){prehidden=pixie_of_pride;}
 		break;
 	}
@@ -774,6 +833,7 @@ void sleepy_eye(ITEM_F item_f){
 	case IPRINT: printf("Sleepy Eye");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		perc125(&thrust);
 		if( energy>=4 ){prehidden=pixie_of_laziness;}
 		break;
 	}
@@ -783,6 +843,7 @@ void silly_eye(ITEM_F item_f){
 	case IPRINT: printf("Silly Eye");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		perc125(&heavy);
 		if( energy>=4 ){prehidden=pixie_of_gluttony;}
 		break;
 	}
@@ -792,6 +853,7 @@ void dangerous_eye(ITEM_F item_f){
 	case IPRINT: printf("Dangerous Eye");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		perc125(&strike);
 		if( energy>=4 ){prehidden=pixie_of_greed;}
 		break;
 	}
@@ -801,6 +863,7 @@ void angry_eye(ITEM_F item_f){
 	case IPRINT: printf("Angry Eye");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		perc125(&force);
 		if( energy>=4 ){prehidden=pixie_of_rage;}
 		break;
 	}
@@ -810,6 +873,7 @@ void blank_eye(ITEM_F item_f){
 	case IPRINT: printf("Blank Eye");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		perc125(&tech);
 		if( energy>=4 ){prehidden=pixie_of_jealousy;}
 		break;
 	}
@@ -819,6 +883,7 @@ void creepy_eye(ITEM_F item_f){
 	case IPRINT: printf("Creepy Eye");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		perc125(&magic);
 		if( energy>=4 ){prehidden=pixie_of_lust;}
 		break;
 	}
@@ -827,7 +892,9 @@ void wicked_eye(ITEM_F item_f){
 	switch(item_f){
 	case IPRINT: printf("Wicked Eye");break;
 	case ENERGY: energy=48;break;
-	case   CODE: break;
+	case   CODE:
+		perc125(&sharp);
+		break;
 	}
 }
 void angel_feather(ITEM_F item_f){
@@ -855,6 +922,8 @@ void clear_feather(ITEM_F item_f){
 	case IPRINT: printf("Clear Feather");break;
 	case ENERGY: energy=24;break;
 	case   CODE:
+		perc50(&heavy);
+		perc150(&tech);
 		if( 0==gn && ji>=5 && energy>=8 ){prehidden=lord_of_flies;}
 		break;
 	}
@@ -864,6 +933,10 @@ void moth_wing(ITEM_F item_f){
 	case IPRINT: printf("Moth Wing");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
+		perc75(&strike);
+		perc75(&slash);
+		perc75(&thrust);
+		perc150(&magic);
 		if( energy>=8 ){prehidden=spirit_of_forest;}
 		break;
 	}
@@ -891,6 +964,11 @@ void aroma_oil(ITEM_F item_f){
 	case IPRINT: printf("Aroma Oil");break;
 	case ENERGY: energy=24;break;
 	case   CODE:
+		if(HIDE==mat_type[material]){
+			perc150(&strike);
+			perc150(&slash);
+			perc150(&thrust);
+		}
 		if( ESSTOTAL>=6 && energy>=8 ){prehidden=wisdom_goddess;}
 		break;
 	}
@@ -963,6 +1041,8 @@ void dragons_breath(ITEM_F item_f){
 	case IPRINT: printf("Dragon's Breath");break;
 	case ENERGY: energy=24;break;
 	case   CODE:
+		perc125(&force);
+		perc125(&tech);
 		if( wi>0 && sa>0 && ESSTOTAL>=3 && energy>=8 ){prehidden=man_of_valor;}
 		break;
 	}
