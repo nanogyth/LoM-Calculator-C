@@ -15,7 +15,13 @@ void init_essences(void){
 }
 
 void print_essences(void){
-	printf(" %2d %2d %2d %2d %2d %2d %2d %2d",wi,sh,dr,au,sa,gn,ji,un);
+	printf(" %2d %2d %2d %2d %2d %2d %2d %2d",
+	wi,sh,dr,au,sa,gn,ji,un);
+}
+
+void print_resists(void){
+	printf("Resists: %2d %2d %2d %2d %2d %2d %2d %2d\n",
+	wiR,shR,drR,auR,saR,gnR,jiR,unR);
 }
 
 void increase(ESSENCE essence){

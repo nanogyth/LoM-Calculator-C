@@ -2,29 +2,34 @@
 #include "calc.h"
 
 void pretty_print(void){
-	printf("\n");
-	print_material(); printf(" ");
-	print_equipment();printf(" : ");
-	print_attack();   printf("\n");
-	printf("Essence:");print_essences(); printf("\n");
-	printf("Markers:");print_markers();  printf("\n");
-	printf("Stats  :");  print_stats();    printf("\n");
+	print_material();
+	print_equipment();
+	print_attack();
+	print_attack_long();
+	print_resists();
+	printf("Essence:");print_essences();printf("\n");
+	print_markers();
+	print_stats();
 	print_immunity();
-	printf("Last Item: "); print_item();     printf("\n");
-	printf("Cards:");  print_cards();    printf("\n");
-	print_special();  printf("\n");
+	print_item();
+	print_cards();
+	print_special();
+	print_price();
 }
 
 int main(void){
 
-	init_essences();
-	init_cards();
-	init_stats();
-
 	get_equipment();
 	get_material();
 
+	init_essences();
+	init_cards();
+	init_stats();
+	init_item();
 	init_special();
+	init_stat_limits();
+	sub_init_cards();
+	material_init();
 
 	while(0==0){
 
@@ -40,7 +45,9 @@ int main(void){
 		activate_cards();
 		increase_essences();
 		calculate_stats();
-		print_essences(); printf("\n");
+		print_essences();
+		printf(" : ");
+		print_attack();
 	}
 	return 0;
 }

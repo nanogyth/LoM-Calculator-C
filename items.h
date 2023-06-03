@@ -13,7 +13,7 @@ int equip;
 #define ROBE    (16==equip)
 #define RING    (18==equip)
 #define BOOTS   (19==equip)
-#define SANDLES (20==equip)
+#define SHOES   (20==equip)
 #define PENDANT (23==equip)
 
 int sharp,heavy,force,tech,strike,slash,thrust,magic;
