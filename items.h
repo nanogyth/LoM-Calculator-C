@@ -13,7 +13,7 @@ int equip;
 #define ROBE    (16==equip)
 #define RING    (18==equip)
 #define BOOTS   (19==equip)
-#define SHOES   (20==equip)
+#define SANDLES (20==equip)
 #define PENDANT (23==equip)
 
 int sharp,heavy,force,tech,strike,slash,thrust,magic;
@@ -25,7 +25,6 @@ void perc50(int *);
 
 /* from essence.c */
 int energy;
-int energy_ge(int);
 int wi,sh,dr,au,sa,gn,ji,un;
 #define ESSTOTAL (wi+sh+dr+au+sa+gn+ji+un) /* to determine which cards to make */
 

@@ -82,7 +82,7 @@ void print_special(void){
 		case Poison_Blade: printf("\tPoison Blade");break;
 		case Quick_Blade:  printf("\tQuick Blade");break;
 		case Sunlight:     printf("\tSunlight");break;
-		case Vampsword:    printf("\tVampsword");break;
+		case Vampsword:    printf("\tThrust");break;
 		}
 		printf("\n");
 		switch(plunge3){
@@ -102,7 +102,6 @@ void print_special(void){
 		case Woodchopper:   printf("\tWoodchopper");break;
 		}
 	}
-	printf("\n");
 }
 void print_immunity(void){
 	if(ARMOR){

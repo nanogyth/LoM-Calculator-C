@@ -10,10 +10,8 @@ void print_cards(void);
 void init_essences(void);
 void increase_essences(void);
 void print_essences(void);
-void print_resists(void);
 
 /* from items.c */
-void init_item(void);
 void get_item(void);
 void item_energy(void);
 void item_code(void);
@@ -27,9 +25,7 @@ void material_code(void);
 void print_material(void);
 void print_equipment(void);
 void print_attack(void);
-void print_attack_long(void);
 void print_markers(void);
-void print_price(void);
 
 /* from stats.c */
 void init_stats(void);
