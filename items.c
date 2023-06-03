@@ -1,28 +1,18 @@
-#include "calc.h"
+#include "items.h"
 
-item_function *if_array[121]={
-no_item,
-wisp_gold,shade_gold,dryad_gold,aura_gold,sala_gold,gnome_gold,
-jinn_gold,undine_gold,wisp_silver,shade_silver,dryad_silver,aura_silver,
-sala_silver,gnome_silver,jinn_silver,undine_silver,fire_stone,earth_stone,
-wind_stone,water_stone,sun_crystal,moon_crystal,glow_crystal,chaos_crystal,
-round_seed,oblong_seed,crooked_seed,big_seed,small_seed,long_seed,
-flat_seed,spiny_seed,bellgrapes,diceberry,mangoelephant,loquat_shoes,
-pear_oheels,squalphin,citrisquid,springanana,peach_puppy,apricat,
-applesocks,whalamato,pine_oclock,fishy_fruit,boarmelon,rhinoloupe,
-orcaplant,garlicrown,honey_onion,sweet_moai,spiny_carrot,conchurnip,
-cornflower,cabadillo,needlettuce,cherry_bombs,masked_potato,lilipods,
-rocket_papaya,orangeopus,bumpkin,heart_mint,spade_basil,dialaurel,
-gold_clover,mush_in_a_box,toadstoolshed,all_meat,sharp_claw,poison_fang,
-giants_horn,scissors,healing_claw,zombie_claw,vampire_fang,little_eye,
-sleepy_eye,silly_eye,dangerous_eye,angry_eye,blank_eye,wicked_eye,
-creepy_eye,angel_feather,raven_feather,clear_feather,moth_wing,flaming_quill,
-white_feather,aroma_oil,dragon_blood,acid,holy_water,ether,
-mercury,stinky_breath,ghosts_howl,dragons_breath,virgins_sigh,electricity,
-moss,ear_of_wheat,baked_roach,blackened_bat,sulpher,poison_powder,
-sleepy_powder,knockout_dust,rust,grave_dirt,ash,hairball,
-needle,mirror_piece,wad_of_wool,messy_scroll,greenball_bun,tako_bug
-};
+typedef enum { IPRINT,ENERGY,CODE } ITEM_F;
+typedef void (item_function)(ITEM_F);
+item_function *item;
+
+void item_energy(void){
+	item(ENERGY);
+}
+void item_code(void){
+	item(CODE);
+}
+void print_item(void){
+	item(IPRINT);
+}
 
 char *item_list=
 " 1 Wisp Gold  25 Round Seed 49 Orcaplant  73 Giant's Ho  97 Mercury   \n"
@@ -403,7 +393,7 @@ void loquat_shoes(ITEM_F item_f){
 	case IPRINT: printf("Loquat-Shoes");break;
 	case ENERGY: energy=16;break;
 	case   CODE:
-		if(19==equip||20==equip){ /* boots/sandles */
+		if(BOOTS||SANDLES){
 			perc125(&strike);
 			perc125(&slash);
 			perc125(&thrust);
@@ -417,7 +407,7 @@ void pear_oheels(ITEM_F item_f){
 	case IPRINT: printf("Pear O'Heels");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
-		if(19==equip||20==equip){ /* boots/sandles */
+		if(BOOTS||SANDLES){
 			perc125(&strike);
 			perc125(&slash);
 			perc125(&thrust);
@@ -549,7 +539,7 @@ void garlicrown(ITEM_F item_f){
 	case ENERGY: energy=8;break;
 	case   CODE:
 		if( energy>=8 ){prehidden=king;}
-		sticky=UNSTICKY;
+		unsticky();
 		taint(AURA);
 		break;
 	}
@@ -569,11 +559,11 @@ void sweet_moai(ITEM_F item_f){
 	case IPRINT: printf("Sweet Moai");break;
 	case ENERGY: energy=32;break;
 	case   CODE:
-		if(13==equip){ /* helm */
+		if(HELM){
 			perc125(&strike);
 			perc125(&slash);
 			perc125(&thrust);
-		} else if(14==equip){ /* hat */
+		} else if(HAT){
 			perc150(&strike);
 			perc150(&slash);
 			perc150(&thrust);
@@ -615,7 +605,7 @@ void cabadillo(ITEM_F item_f){
 	case IPRINT: printf("Cabadillo");break;
 	case ENERGY: energy=8;break;
 	case   CODE:
-		if(15==equip){ /* hauberk */
+		if(HAUBERK){
 			perc125(&strike);
 			perc125(&slash);
 			perc125(&thrust);
@@ -964,7 +954,7 @@ void aroma_oil(ITEM_F item_f){
 	case IPRINT: printf("Aroma Oil");break;
 	case ENERGY: energy=24;break;
 	case   CODE:
-		if(HIDE==mat_type[material]){
+		if(HIDE){
 			perc150(&strike);
 			perc150(&slash);
 			perc150(&thrust);
@@ -995,7 +985,7 @@ void holy_water(ITEM_F item_f){
 	case ENERGY: energy=16;break;
 	case   CODE:
 		if( energy>=8 ){prehidden=cleric;}
-		sticky=UNSTICKY;
+		unsticky();
 		break;
 	}
 }
@@ -1218,4 +1208,38 @@ void tako_bug(ITEM_F item_f){
 	case ENERGY: energy=8;break;
 	case   CODE: break;
 	}
+}
+
+item_function *if_array[121]={
+no_item,
+wisp_gold,shade_gold,dryad_gold,aura_gold,sala_gold,gnome_gold,
+jinn_gold,undine_gold,wisp_silver,shade_silver,dryad_silver,aura_silver,
+sala_silver,gnome_silver,jinn_silver,undine_silver,fire_stone,earth_stone,
+wind_stone,water_stone,sun_crystal,moon_crystal,glow_crystal,chaos_crystal,
+round_seed,oblong_seed,crooked_seed,big_seed,small_seed,long_seed,
+flat_seed,spiny_seed,bellgrapes,diceberry,mangoelephant,loquat_shoes,
+pear_oheels,squalphin,citrisquid,springanana,peach_puppy,apricat,
+applesocks,whalamato,pine_oclock,fishy_fruit,boarmelon,rhinoloupe,
+orcaplant,garlicrown,honey_onion,sweet_moai,spiny_carrot,conchurnip,
+cornflower,cabadillo,needlettuce,cherry_bombs,masked_potato,lilipods,
+rocket_papaya,orangeopus,bumpkin,heart_mint,spade_basil,dialaurel,
+gold_clover,mush_in_a_box,toadstoolshed,all_meat,sharp_claw,poison_fang,
+giants_horn,scissors,healing_claw,zombie_claw,vampire_fang,little_eye,
+sleepy_eye,silly_eye,dangerous_eye,angry_eye,blank_eye,wicked_eye,
+creepy_eye,angel_feather,raven_feather,clear_feather,moth_wing,flaming_quill,
+white_feather,aroma_oil,dragon_blood,acid,holy_water,ether,
+mercury,stinky_breath,ghosts_howl,dragons_breath,virgins_sigh,electricity,
+moss,ear_of_wheat,baked_roach,blackened_bat,sulpher,poison_powder,
+sleepy_powder,knockout_dust,rust,grave_dirt,ash,hairball,
+needle,mirror_piece,wad_of_wool,messy_scroll,greenball_bun,tako_bug
+};
+
+void get_item(void){
+	int item_code;
+	char dump[256];
+	while(scanf("%d",&item_code)==0 || item_code>120 || item_code<1){
+		scanf("%s",dump);
+		printf(item_list);
+	}
+	item=if_array[item_code];
 }

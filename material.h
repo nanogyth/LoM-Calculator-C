@@ -1,18 +1,18 @@
-int equip;
-char *equip_list;
-int equip_props[24][4];
-int sharp,heavy,force,tech,strike,slash,thrust,magic;
+#include "stdio.h"
 
-int material;
-char *material_list;
-int mat_props[56][17];
-int wiR,shR,drR,auR,saR,gnR,jiR,unR;
+/* from cards.c */
+typedef enum { CPRINT,PREHIDDEN,HIDDEN,FIRST,SECOND,THIRD,LEAVING,WORLD } CARD_F;
+typedef void (card_function)(CARD_F);
+card_function *prehidden, dryad;
 
-typedef enum { NO_MAT,METAL,WOOD,STONE,HIDE,SCALE,BONE,FABRIC,AEROLITE } MATERIAL;
-MATERIAL mat_type[56];
 
-void mat_code(MATERIAL);
-void perc150(int *);
-void perc125(int *);
-void perc75(int *);
-void perc50(int *);
+/* from essence.c */
+int energy;
+
+int wi,sh,dr,au,sa,gn,ji,un;
+#define ESSTOTAL (wi+sh+dr+au+sa+gn+ji+un)
+
+typedef enum { WISP,SHADE,DRYAD,AURA,SALA,GNOME,JINN,UNDINE } ESSENCE;
+void taint(ESSENCE);
+void decrease(ESSENCE);
+
